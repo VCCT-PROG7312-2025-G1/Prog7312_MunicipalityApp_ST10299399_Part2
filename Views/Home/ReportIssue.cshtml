@@ -1,0 +1,56 @@
+﻿@model Prog7312_MunicipalityApp_ST10299399.ViewModels.ReportIssueViewModel
+
+@{
+    ViewData["Title"] = "Report an Issue";
+}
+
+<a href="@Url.Action("Index", "Home")" class="btn btn-secondary mt-3">
+    Back to Home
+</a>
+
+<h1>Report a new issue</h1>
+
+<form asp-action="ReportIssue" method="post" enctype="multipart/form-data" class="mt-4">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group mb-3">
+        <label asp-for="issueType" class="form-label"> Issue Type</label>
+       <select asp-for="issueType" class="form-select">
+            <option value="">-- Select Issue Type --</option>
+            <option value="Pothole">Pothole</option>
+            <option value="Streetlight">Streetlight</option>
+            <option value="Garbage">Garbage</option>
+            <option value="Water Leak">Water Leak</option>
+            <option value="Feature Request">Feature Request</option>
+            <option value="Other">Other</option>
+        </select>
+        <span asp-validation-for="issueType" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="issueDescription" class="form-label">Description</label>
+        <textarea asp-for="issueDescription" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="issueDescription" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="issueLocation" class="form-label">Location</label>
+        <input asp-for="issueLocation" class="form-control" />
+        <span asp-validation-for="issueLocation" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label">Upload Image/File (optional)</label>
+        <input asp-for="issueImage" type="file" class="form-control" />
+        <span asp-validation-for="issueImage" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Submit Issue</button>
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
