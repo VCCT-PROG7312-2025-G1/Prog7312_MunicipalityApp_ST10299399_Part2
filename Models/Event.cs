@@ -10,6 +10,6 @@
         public string Location { get; set; }
         public string? ImageUrl { get; set; }
 
-        public DateTime PostedDate { get; set; } = DateTime.Now;
+        public DateTime PostedDate { get; set; }
     }
 }

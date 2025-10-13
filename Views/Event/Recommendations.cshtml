@@ -1,0 +1,47 @@
+﻿@model List<Prog7312_MunicipalityApp_ST10299399.Models.Event>
+
+@{
+    ViewData["Title"] = "Recommended Events";
+}
+
+
+<h1 class="display-4 mb-4">Recommended Events for You</h1>
+
+<div class="alert alert-success" role="alert">
+    @Html.Raw(ViewBag.Reason)
+</div>
+
+
+<div class="row">
+    @if (Model.Any())
+    {
+        foreach (var eventItem in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title>">@eventItem.Title</h5>
+                        <p class="card-text text-muted">@eventItem.EventDate.ToShortDateString() at @eventItem.Location</p>
+                        <p class="card-text">@eventItem.Description</p>
+                        <span class="badge bg-info text-dark">@eventItem.Category</span>
+                    </div>
+                </div>
+            </div>
+        }
+     }
+    else
+    {
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                No recommended events available at the moment.
+            </div>
+        </div>
+    }
+</div>
+
+<div class="mt-4">
+    <a asp-controller="Event" asp-action="Index" class="btn btn-secondary">
+        Back to Events
+    </a>
+</div>
+

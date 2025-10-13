@@ -48,7 +48,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             {
                 EventsByDate = sortedEvents,
                 SearchResults = searchResults,
-                AllCategories = allCategories
+                AllCategories = allCategories,
                 SelectedCategory = category,
                 SearchQuery = query,
                 QuickAnnouncements = quickAnnouncements

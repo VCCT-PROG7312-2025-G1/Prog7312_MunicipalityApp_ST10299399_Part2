@@ -13,6 +13,8 @@ namespace Prog7312_MunicipalityApp_ST10299399.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            DateTime today = DateTime.Parse("2025-10-13");
             // Seed initial data
             modelBuilder.Entity<Event>().HasData(
                 new Event
@@ -21,7 +23,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Data
                     Title = "Community Cleanup",
                     Description = "Join us for a community cleanup event to keep our neighborhood beautiful.",
                     Category = "Environment",
-                    Date = DateTime.Now.AddDays(10),
+                    EventDate = today.AddDays(10),
                     Location = "Central Park",
                     ImageUrl = "https://example.com/images/cleanup.jpg"
                 },
@@ -31,7 +33,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Data
                     Title = "Farmers Market",
                     Description = "Fresh produce and local goods available at the weekly farmers market.",
                     Category = "Market",
-                    Date = DateTime.Now.AddDays(5),
+                    EventDate = today.AddDays(5),
                     Location = "Town Square",
                     ImageUrl = "https://example.com/images/farmers_market.jpg"
                 },
@@ -41,7 +43,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Data
                     Title = "Art in the Park",
                     Description = "Experience local art and live music in the park.",
                     Category = "Art",
-                    Date = DateTime.Now.AddDays(15),
+                    EventDate = today.AddDays(15),
                     Location = "Riverside Park",
                     ImageUrl = "https://example.com/images/art_in_park.jpg"
                 }
