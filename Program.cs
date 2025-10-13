@@ -16,6 +16,10 @@ namespace Prog7312_MunicipalityApp_ST10299399
             builder.Services.AddSingleton<IIssueRepository, IssueRepository>();
             builder.Services.AddScoped<IIssueService, IssueService>();
 
+            // Register Event services and repositories
+            builder.Services.AddSingleton<IEventRepository, EventRepository>();
+            builder.Services.AddScoped<IEventService, EventService>();
+
             // Configure SQLite Database
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
