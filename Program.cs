@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Prog7312_MunicipalityApp_ST10299399.Data;
 using Prog7312_MunicipalityApp_ST10299399.Repositories;
 using Prog7312_MunicipalityApp_ST10299399.Services;
 
@@ -14,8 +16,19 @@ namespace Prog7312_MunicipalityApp_ST10299399
             builder.Services.AddSingleton<IIssueRepository, IssueRepository>();
             builder.Services.AddScoped<IIssueService, IssueService>();
 
+            // Configure SQLite Database
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
+            );
+
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                dbContext.Database.Migrate();
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
