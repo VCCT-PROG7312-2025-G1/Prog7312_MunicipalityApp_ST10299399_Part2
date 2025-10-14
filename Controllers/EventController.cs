@@ -116,5 +116,39 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
 
             return View(recommendedEvents);
         }
+
+
+        private bool IsUserAdmin()
+        {
+            var role = HttpContext.Session.GetString("Role");
+            return role == "Admin";
+        }
+
+        [HttpGet]
+        public IActionResult CreateEvent()
+        {
+            if (!IsUserAdmin())
+            {
+                TempData["ErrorMessage"] = "You must be an admin to create events.";
+                return RedirectToAction("Login", "Login");
+            }
+            return View(new Event());
+        }
+
+        [HttpPost]
+        public IActionResult CreateEvent(Event newEvent)
+        {
+            if (!IsUserAdmin())
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            if (ModelState.IsValid)
+            {
+                _eventService.PostNewEvent(newEvent);
+                TempData["SuccessMessage"] = "Event created successfully!";
+                return RedirectToAction("Index");
+            }
+            return View(newEvent);
+        }
     }
 }
