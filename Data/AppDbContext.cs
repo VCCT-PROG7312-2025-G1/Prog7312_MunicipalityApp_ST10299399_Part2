@@ -12,6 +12,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Data
         }
         // DbSet representing the Events table
         public DbSet<Event> Events { get; set; }
+        public DbSet<User> Users { get; set; }
 
         // Seed initial data into the database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,31 +25,39 @@ namespace Prog7312_MunicipalityApp_ST10299399.Data
                 {
                     Id = 1,
                     Title = "Community Cleanup",
-                    Description = "Join us for a community cleanup event to keep our neighborhood beautiful.",
+                    Description = "Come help us keep our town clean!!!",
                     Category = "Environment",
                     EventDate = today.AddDays(10),
-                    Location = "Central Park",
-                    ImageUrl = "https://example.com/images/cleanup.jpg"
+                    Location = "Vyeboom",
                 },
                 new Event
                 {
                     Id = 2,
-                    Title = "Farmers Market",
-                    Description = "Fresh produce and local goods available at the weekly farmers market.",
+                    Title = "Church Bazaar",
+                    Description = "Come and join us for a lovely Church Bazaar to support the Church",
                     Category = "Market",
                     EventDate = today.AddDays(5),
-                    Location = "Town Square",
-                    ImageUrl = "https://example.com/images/farmers_market.jpg"
+                    Location = "Vyeboom Church",
                 },
                 new Event
                 {
                     Id = 3,
-                    Title = "Art in the Park",
-                    Description = "Experience local art and live music in the park.",
-                    Category = "Art",
+                    Title = "Park Run",
+                    Description = "Come and support our first ever park run!",
+                    Category = "Sport",
                     EventDate = today.AddDays(15),
-                    Location = "Riverside Park",
-                    ImageUrl = "https://example.com/images/art_in_park.jpg"
+                    Location = "Vyeboom Park",
+                }
+            );
+
+            // Seed an admin user 
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 1,
+                    Username = "admin",
+                    Password = "Admin@123", 
+                    Role = "Admin"
                 }
             );
         }
