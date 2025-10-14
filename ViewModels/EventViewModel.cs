@@ -3,6 +3,9 @@ using Prog7312_MunicipalityApp_ST10299399.Models;
 
 namespace Prog7312_MunicipalityApp_ST10299399.ViewModels
 {
+    // ViewModel for passing event data to the view
+    // Contains event listings, search results, categories, and announcements
+    // Used in the EventController to render the event page
     public class EventViewModel
     {
         public SortedDictionary<DateTime, List<Event>> EventsByDate { get; set; }

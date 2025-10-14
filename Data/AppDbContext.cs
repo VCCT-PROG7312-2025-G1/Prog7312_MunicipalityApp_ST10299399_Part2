@@ -3,19 +3,22 @@ using Prog7312_MunicipalityApp_ST10299399.Models;
 
 namespace Prog7312_MunicipalityApp_ST10299399.Data
 {
+    // Database context for the application
     public class AppDbContext : DbContext
     {
+        // Constructor accepting DbContext options
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
+        // DbSet representing the Events table
         public DbSet<Event> Events { get; set; }
 
+        // Seed initial data into the database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             DateTime today = DateTime.Parse("2025-10-13");
-            // Seed initial data
             modelBuilder.Entity<Event>().HasData(
                 new Event
                 {

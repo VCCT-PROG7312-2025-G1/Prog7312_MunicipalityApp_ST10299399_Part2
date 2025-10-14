@@ -1,5 +1,6 @@
 ﻿namespace Prog7312_MunicipalityApp_ST10299399.Models
 {
+    // Represents an event in the municipality application
     public class Event
     {
         public int Id { get; set; }
