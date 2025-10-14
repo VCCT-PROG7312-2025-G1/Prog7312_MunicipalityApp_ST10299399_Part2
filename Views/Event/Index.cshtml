@@ -4,19 +4,6 @@
     ViewData["Title"] = "Local Events and Announcements";
 }
 
-@* <style>
-    .container{
-        background-color: #f8f8f8;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
-    }
-
-    body {
-        background-color: #ededed;
-    }
-</style> *@
 
 <h1 class="mb-4">Local Events and Announcements</h1>
 
@@ -53,9 +40,6 @@
 
 <form asp-controller="Event" asp-action="Index" method="get" class="mb-5">
     <div class="row">
-        <div class="col-md-5">
-            <input type="text" name="query" class="form-control" placeholder="Search events..." value="@Model.SearchQuery"/>
-        </div>
         <div class="col-md-4">
             <select name="category" class="form-control">
                 <option value="">All Categories</option>

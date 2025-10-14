@@ -1,3 +1,45 @@
 ﻿@model Prog7312_MunicipalityApp_ST10299399.Models.Event
 
+@{
+    ViewData["Title"] = "Create New Event";
+}
 
+<h2 class="mb-4">Create New Event</h2>
+
+<form asp-action="CreateEvent" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Event Title</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label">Category</label>
+        <select asp-for="Category" class="form-select">
+            <option value="">Select Category</option>
+            <option>Community</option>
+            <option>Health</option>
+            <option>Education</option>
+            <option>Recreation</option>
+            <option>Other</option>
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="EventDate" class="form-label">Event Date</label>
+        <input asp-for="EventDate" type="datetime-local" class="form-control" />
+        <span asp-validation-for="EventDate" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label asp-for="Location" class="form-label">Location</label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create Event</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+
+</form>
