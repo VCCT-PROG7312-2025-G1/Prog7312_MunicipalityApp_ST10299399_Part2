@@ -6,6 +6,18 @@ The repository is for a web application for a municipality. The application allo
 * **Upload Files:** Users can choose if they what to submit a file or image with their report.
 * **View Issues:** Users are able to see all the issues that have been submitted already
 * **Dynamic UI:** A modern home page that uses a carousel instead of just having 3 buttons
+-- New Features
+* **View Events:** Users are able to view events
+* **Announcements:** Users are able to see announcements
+* **Admin Login:** Admin is able to login and add new events to the system
+* **Filter:** Users are able to filter events
+
+## Advanced Data Stuctures used
+* **Linked List:** Part 1 used in IssueCollection, IssueNode, IssueRepository
+* **Sorted Dictionary:** Part 2 used in EventService for to keep and display events in order
+* **Hash Set:** Part 2 used in Event Controller for filter feature
+* **Queue:** Part 2 used in Event Controller for displaying events with title announcements
+* **Hash Table:** Part 2 used in EventController for Recommendations Feature
 
 ## Technology Used
 - Language: C#
@@ -22,7 +34,6 @@ The repository is for a web application for a municipality. The application allo
 5. Run the application
 
 ## Future Updates
-- Events page on which users will see events that are happening in their community
 - Status page improvements to make the page more modern
 
 ## References
