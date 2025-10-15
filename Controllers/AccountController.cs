@@ -37,7 +37,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
