@@ -37,6 +37,10 @@ The repository is for a web application for a municipality. The application allo
 Username: admin
 Password: Admin@123
 
+## Database Content
+- Open SQLite and press open database
+- Select the municipality.db file from the project folder
+
 ## Future Updates
 - Status page improvements to make the page more modern
 
