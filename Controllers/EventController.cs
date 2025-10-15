@@ -22,17 +22,17 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             _issueService = issueService;
         }
         // Displays the main event page with optional search and category filtering
-        public IActionResult Index(string query, string category)
+        public IActionResult Index(string category)
         {
             // Retrieve events sorted by date
             var sortedEvents = _eventService.GetEventsByDate();
 
             // Perform search if query or category is provided
             IEnumerable<Event> searchResults;
-            if (!string.IsNullOrEmpty(query) || !string.IsNullOrEmpty(category))
+            if (!string.IsNullOrEmpty(category))
             // Search events based on query and category
             {
-                searchResults = _eventService.SearchEvents(query, category);
+                searchResults = _eventService.SearchEvents(null, category);
             }
             else
             {
@@ -59,7 +59,6 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
                 SearchResults = searchResults,
                 AllCategories = allCategories,
                 SelectedCategory = category,
-                SearchQuery = query,
                 QuickAnnouncements = quickAnnouncements
             };
             return View(viewModel);
@@ -67,53 +66,27 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
         }
 
         // Provides event recommendations based on reported issues
-        public IActionResult Recommendations()
+        public IActionResult Recommendations(string category)
         {
-            // Analyze reported issues to determine the most common issue type
-            var allIssues = _issueService.GetAllIssues();
-            // Count occurrences of each issue type
-            var issueTypesCounts = new Dictionary<string, int>();
-            // Tally issue types
-            foreach (var issue in allIssues)
-            {
-                string issueType = issue.issueType;
-                // Increment count for the issue type
-                if (issueTypesCounts.ContainsKey(issue.issueType))
-                {
-                    issueTypesCounts[issue.issueType]++;
-                }
-                else
-                {
-                    issueTypesCounts[issue.issueType] = 1;
-                }
-            }
-            // Determine the most frequently reported issue type
-            string mostCommonIssueType = null;
-            // Get the issue type with the highest count
-            if (issueTypesCounts.Any())
-            {
-                // Select the issue type with the maximum count
-                mostCommonIssueType = issueTypesCounts.OrderByDescending(kv => kv.Value).First().Key;
-            }
+            string recommendationCategory;
+            string recommendatioReason;
 
-            // Map issue types to event categories for recommendations
-            string recommendedCategory = mostCommonIssueType switch
+            if (!string.IsNullOrEmpty(category))
             {
-                "Pothole" => "Announcement",
-                "Waste Management" => "Environmental",
-                "Loadshedding" => "Announcement",
-                _ => "Sport"
-            };
+               recommendationCategory = category;
+                recommendatioReason = $"Based on your interest in {category} events";
+            }
+            else
+            {
+                recommendationCategory = "Announcement";
+                recommendatioReason = "General Recommendations";
 
-            // Fetch events in the recommended category
-            var recommendedEvents = _eventService.SearchEvents(null, recommendedCategory)
-                .OrderBy(e => e.EventDate)
-                .Take(3)
+            }
+            var recommendedEvents = _eventService.SearchEvents(null, recommendationCategory)
+                .OrderByDescending(e => e.PostedDate)
+                .Take(5)
                 .ToList();
-
-            // Pass recommendation reason to the view
-            ViewBag.Reason = $"Based on your reported issues, we recommend events in the '{recommendedCategory}' category.";
-
+            ViewBag.RecommendationReason = recommendatioReason;
             return View(recommendedEvents);
         }
 

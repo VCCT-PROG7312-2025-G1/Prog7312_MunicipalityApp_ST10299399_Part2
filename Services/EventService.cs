@@ -45,11 +45,6 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
             var allEvents = _eventRepository.GetAllEvents();
             var results = allEvents.AsQueryable();
 
-            // Filter events based on the search query and category
-            if (!string.IsNullOrEmpty(query))
-            {
-                results = results.Where(e => e.Title.Contains(query) || e.Description.Contains(query));
-            }
             // If a specific category is selected, filter events by that category
             if (!string.IsNullOrEmpty(category) && category != "All")
             {

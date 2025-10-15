@@ -21,10 +21,13 @@
         <label asp-for="Category" class="form-label">Category</label>
         <select asp-for="Category" class="form-select">
             <option value="">Select Category</option>
+            <option>Announcement</option>
+            <option>Sport</option>
+            <option>Festival</option>
+            <option>Holiday Events</option>
             <option>Community</option>
             <option>Health</option>
             <option>Education</option>
-            <option>Recreation</option>
             <option>Other</option>
         </select>
         <span asp-validation-for="Category" class="text-danger"></span>

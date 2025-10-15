@@ -18,9 +18,7 @@
             {
                 <li><small>@announcement.Title</small></li>
             }
-        </ul>
-    
-        
+        </ul>  
     }
     else
     {
@@ -31,7 +29,7 @@
 <hr />
 
 <div class="mb-4">
-    <a asp-controller="Event" asp-action="Recommendations" class="btn btn-primary">
+    <a asp-controller="Event" asp-action="Recommendations" asp-route-searchQuery="@Model.SearchQuery" class="btn btn-primary">
         View Recommended Events
     </a>
 </div>
@@ -61,7 +59,6 @@
     @foreach ( var dateGroup in Model.EventsByDate)
     {
         var relevantEvents = dateGroup.Value.Where(e => Model.SearchResults.Contains(e)).ToList();
-
         if (relevantEvents.Any())
         {
             <div class="card mb-3">
@@ -73,17 +70,15 @@
                     {
                         <li class="list-group-item">
                             <h6 class="mb-1">@eventItem.Title</h6>
-                            <p class="mb-1">Category: <span class="badge bg-secondary">@eventItem.Category</span></p>
+                            <p class="mb-1">Category: @eventItem.Category</p>
                             <p class="mb-1">Location: @eventItem.Location</p>
                             <p class="mb-1">@eventItem.Description</p>
-                            
                         </li>
                     }
                 </ul>
             </div>
         }
     }
-
 }
 else
 {
