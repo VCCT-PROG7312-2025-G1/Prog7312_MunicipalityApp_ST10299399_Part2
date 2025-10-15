@@ -33,6 +33,10 @@ The repository is for a web application for a municipality. The application allo
    Build > Build Solution
 5. Run the application
 
+## Admin Login
+Username: admin
+Password: Admin@123
+
 ## Future Updates
 - Status page improvements to make the page more modern
 
@@ -43,4 +47,6 @@ The repository is for a web application for a municipality. The application allo
 - Linked List: https://youtu.be/N6dOwBde7-M?si=GKx92yeDTyR7y1a7
 - Carousel Implementation: https://stackoverflow.com/questions/60578096/mvc-c-sharp-carousel-image
                            https://youtu.be/XtFlpgaLbZ4?si=osT-hTxa4VJqUxtc
+- Gemini: Help with hash set and sorted dictionary
+- https://youtu.be/9y0DKw_H9zw?si=NsmaxeH7MdUdI0-O
 
