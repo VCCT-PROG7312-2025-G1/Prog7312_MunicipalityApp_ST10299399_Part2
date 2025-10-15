@@ -6,6 +6,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
     public class AccountController : Controller
     {
         private readonly AppDbContext _context;
+        // Constructor with dependency injection for database context   
         public AccountController(AppDbContext context)
         {
             _context = context;
@@ -18,6 +19,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
         }
 
         [HttpPost]
+        // Handles user login
         public IActionResult Login(string username, string password)
         {
             var user = _context.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
@@ -30,6 +32,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             ViewBag.Error = "Invalid username or password";
             return View();
         }
+        // Handles user logout
 
         public IActionResult Logout()
         {

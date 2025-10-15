@@ -6,10 +6,8 @@
 
 
 <h1 class="mb-4">Local Events and Announcements</h1>
-
 <div class="alert alert-info" role="alert">
     <strong>Quick Announcements (Queue): </strong>
-
     @if (Model.QuickAnnouncements.Any())
     {
         <span>@Model.QuickAnnouncements.Count announcement available</span>
@@ -29,7 +27,7 @@
 <hr />
 
 <div class="mb-4">
-    <a asp-controller="Event" asp-action="Recommendations" asp-route-searchQuery="@Model.SearchQuery" class="btn btn-primary">
+    <a asp-controller="Event" asp-action="Recommendations" asp-route-searchQuery="@Model.SelectedCategory" class="btn btn-primary">
         View Recommended Events
     </a>
 </div>

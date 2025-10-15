@@ -27,10 +27,10 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             // Retrieve events sorted by date
             var sortedEvents = _eventService.GetEventsByDate();
 
-            // Perform search if query or category is provided
+            // Perform search if category is provided
             IEnumerable<Event> searchResults;
             if (!string.IsNullOrEmpty(category))
-            // Search events based on query and category
+            // Search events based on category
             {
                 searchResults = _eventService.SearchEvents(null, category);
             }
@@ -65,12 +65,13 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
 
         }
 
-        // Provides event recommendations based on reported issues
+        // Provides event recommendations based on user interest or general announcements
         public IActionResult Recommendations(string category)
         {
             string recommendationCategory;
             string recommendatioReason;
 
+            // Determine recommendation category based on user interest or default to announcements
             if (!string.IsNullOrEmpty(category))
             {
                recommendationCategory = category;
@@ -82,6 +83,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
                 recommendatioReason = "General Recommendations";
 
             }
+            // Fetch top 5 recommended events based on the determined category
             var recommendedEvents = _eventService.SearchEvents(null, recommendationCategory)
                 .OrderByDescending(e => e.PostedDate)
                 .Take(5)
@@ -90,9 +92,10 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             return View(recommendedEvents);
         }
 
-
+        // Checks if the current user has admin privileges
         private bool IsUserAdmin()
         {
+            // Check if the user is logged in and has admin role
             var role = HttpContext.Session.GetString("Role");
             return role == "Admin";
         }
@@ -100,6 +103,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
         [HttpGet]
         public IActionResult CreateEvent()
         {
+            // Only allow access if the user is an admin
             if (!IsUserAdmin())
             {
                 TempData["ErrorMessage"] = "You must be an admin to create events.";
@@ -109,14 +113,19 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
         }
 
         [HttpPost]
+        // Handles the creation of a new event
+        // Only accessible by admin users
         public IActionResult CreateEvent(Event newEvent)
         {
             if (!IsUserAdmin())
             {
                 return RedirectToAction("Login", "Login");
             }
+            // Server-side validation
+            // Ensure the event date is in the future
             if (ModelState.IsValid)
             {
+                // Save the new event using the event service
                 _eventService.PostNewEvent(newEvent);
                 TempData["SuccessMessage"] = "Event created successfully!";
                 return RedirectToAction("Index");

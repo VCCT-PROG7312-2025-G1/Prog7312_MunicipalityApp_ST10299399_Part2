@@ -28,6 +28,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
 
         public IActionResult ReportIssue()
         {
+            // Display the issue reporting form
             return View(new ReportIssueViewModel());
         }
 

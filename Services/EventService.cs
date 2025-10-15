@@ -19,6 +19,9 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
         }
 
         // Retrieves events grouped by date
+        // Returns a sorted dictionary with dates as keys and lists of events as values
+        // Events are grouped by their event date
+        // The dictionary is sorted by date
         public SortedDictionary<DateTime, List<Event>> GetEventsByDate()
         {
             // Get all events from the repository
@@ -39,10 +42,14 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
             return sortedEvents;
         }
 
-        // Searches events based on a query and category
+        // Searches events based on a category
+        // Returns a list of events that match the specified category
+        // If category is "All", returns all events
         public IEnumerable<Event> SearchEvents(string query, string category)
         {
+            // Get all events from the repository
             var allEvents = _eventRepository.GetAllEvents();
+            // Start with all events as the initial result set
             var results = allEvents.AsQueryable();
 
             // If a specific category is selected, filter events by that category
@@ -53,6 +60,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
             return results.OrderBy(e => e.EventDate).ToList();
         }
         // Posts a new event
+        // Sets the posted date to the current date and time
         public void PostNewEvent(Event newEvent)
         {
             newEvent.PostedDate = DateTime.Now;

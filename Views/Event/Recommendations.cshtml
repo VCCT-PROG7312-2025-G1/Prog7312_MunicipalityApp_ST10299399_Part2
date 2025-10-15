@@ -4,13 +4,11 @@
     ViewData["Title"] = "Recommended Events";
 }
 
-
 <h1 class="display-4 mb-4">Recommended Events for You</h1>
 
 <div class="alert alert-success" role="alert">
     @Html.Raw(ViewBag.Reason)
 </div>
-
 
 <div class="row">
     @if (Model.Any())
