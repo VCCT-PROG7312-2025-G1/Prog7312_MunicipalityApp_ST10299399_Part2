@@ -13,6 +13,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Data
         // DbSet representing the Events table
         public DbSet<Event> Events { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Issue> Issues { get; set; }
 
         // Seed initial data into the database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
