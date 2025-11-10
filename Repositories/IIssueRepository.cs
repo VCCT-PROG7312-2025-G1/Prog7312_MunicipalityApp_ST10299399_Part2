@@ -9,6 +9,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
         void AddIssue(Issue issue);
         Issue GetIssueById(int id);
         IEnumerable<Issue> GetAllIssues();
+        void UpdateIssue(Issue issue);
 
     }
 }

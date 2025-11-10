@@ -32,5 +32,16 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
         {
             return _issueRepository.GetAllIssues();
         }
+
+        // Updates the status of an existing issue
+        public void UpdateIssueStatus(int id, string newStatus)
+        {
+            var issueToUpdate = _issueRepository.GetIssueById(id);
+            if (issueToUpdate != null)
+            {
+                issueToUpdate.issueStatus = newStatus;
+                _issueRepository.UpdateIssue(issueToUpdate);
+            }
+        }
     }
 }

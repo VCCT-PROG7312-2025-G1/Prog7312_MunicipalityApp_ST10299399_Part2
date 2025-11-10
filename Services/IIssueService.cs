@@ -12,5 +12,8 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
         // Retrieves all issues
         IEnumerable<Issue> GetAllIssues();
 
+        // Updates the status of an existing issue
+        void UpdateIssueStatus(int id, string newStatus);
+
     }
 }

@@ -1,28 +1,36 @@
 ﻿using Prog7312_MunicipalityApp_ST10299399.Models;
+using Prog7312_MunicipalityApp_ST10299399.DataStructures;
 
 namespace Prog7312_MunicipalityApp_ST10299399.Repositories
 {
     public class IssueRepository : IIssueRepository
     {
-        // Static collection to hold issues in memory
-        private static readonly IssueCollection _issues = new IssueCollection();
+        // Static tree to hold issues
+        private static readonly ServiceRequestTree _issuesTree = new ServiceRequestTree();
+        private static int _nextId = 1; // Static counter for unique issue IDs
 
-        // Adds a new issue to the collection
+        // Add a new issue to the collection
         public void AddIssue(Issue issue)
         {
-            _issues.Add(issue);
+            issue.Id = System.Threading.Interlocked.Increment(ref _nextId);
+            _issuesTree.Insert(issue);
         }
 
-        // Retrieves an issue by its ID
+        // Retrieve an issue by its ID
         public Issue GetIssueById(int id)
         {
-            return _issues.GetById(id);
+            return _issuesTree.Search(id);
         }
 
-        // Retrieves all issues as an enumerable collection
+        // Retrieve all issues in the collection
         public IEnumerable<Issue> GetAllIssues()
         {
-            return _issues;
+            return _issuesTree.GetAllIssues();
+        }
+
+        // Update an existing issue
+        public void UpdateIssue(Issue issue)
+        {
         }
     }
 }
