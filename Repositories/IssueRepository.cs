@@ -6,42 +6,31 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
 {
     public class IssueRepository : IIssueRepository
     {
-        private readonly AppDbContext _context;
-
-        public IssueRepository(AppDbContext context)
-        {
-            _context = context;
-        }
+        private static readonly ServiceRequestTree _issueTree = new ServiceRequestTree();
+        private static int _nextId = 1;
 
         // Add a new issue to the collection
         public void AddIssue(Issue issue)
         {
-            _context.Issues.Add(issue);
-            _context.SaveChanges();
+            issue.Id = System.Threading.Interlocked.Increment(ref _nextId);
+            _issueTree.Insert(issue);
         }
 
         // Retrieve an issue by its ID
         public Issue GetIssueById(int id)
         {
-            return _context.Issues.Find(id);
+            return _issueTree.Search(id);
         }
 
         // Retrieve all issues in the collection
         public IEnumerable<Issue> GetAllIssues()
         {
-            return _context.Issues.OrderByDescending(i => i.issueDate).ToList();
+            return _issueTree.GetAllIssues();
         }
 
         // Update an existing issue
         public void UpdateIssue(Issue issue)
         {
-            _context.Issues.Update(issue);
-            _context.SaveChanges();
-        }
-
-        public IEnumerable<Issue> GetIssuesByStatus(string status)
-        {
-            return _context.Issues.Where(i => i.issueStatus == status).ToList();
         }
     }
 }

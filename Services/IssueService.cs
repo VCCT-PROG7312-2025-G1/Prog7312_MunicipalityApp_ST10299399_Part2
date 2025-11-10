@@ -31,13 +31,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
         // Retrieves all issues
         public IEnumerable<Issue> GetAllIssues()
         {
-            var issuesFromDb = _issueRepository.GetAllIssues();
-            var issueTree = new ServiceRequestTree();
-            foreach (var issue in issuesFromDb)
-            {
-                issueTree.Insert(issue);
-            }
-            return issueTree.GetAllIssues();
+            return _issueRepository.GetAllIssues();
         }
 
         // Updates the status of an existing issue
