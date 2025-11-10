@@ -25,7 +25,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.DataStructures
             }
 
             var possibleTransitions = _adjacencyList[currentStatus];
-            return possibleTransitions.Contains(newStatus);
+            return possibleTransitions.Any(p => p.Equals(newStatus, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

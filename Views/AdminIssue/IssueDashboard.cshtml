@@ -52,7 +52,7 @@
 
                     <td>
                             <form asp-controller="AdminIssue" asp-action="UpdateStatus" method="post" class="d-flex">
-                                <input type="hidden" name="issueId" value="@issue.Id" />
+                                <input type="hidden" name="id" value="@issue.Id" />
                                 
                                 <select name="newStatus" class="form-control form-control-sm me-2" required>
                                     <option value="" disabled selected>Change Status To</option>
