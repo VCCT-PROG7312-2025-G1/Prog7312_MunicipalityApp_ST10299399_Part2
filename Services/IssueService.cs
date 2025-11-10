@@ -1,6 +1,7 @@
 ﻿using Prog7312_MunicipalityApp_ST10299399.Models;
 using Prog7312_MunicipalityApp_ST10299399.Repositories;
-using Prog7312_MunicipalityApp_ST10299399.DataStructures;       
+using Prog7312_MunicipalityApp_ST10299399.DataStructures;
+using Prog7312_MunicipalityApp_ST10299399.Helpers;
 
 namespace Prog7312_MunicipalityApp_ST10299399.Services
 {
@@ -43,6 +44,29 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
                 issueToUpdate.issueStatus = newStatus;
                 _issueRepository.UpdateIssue(issueToUpdate);
             }
+        }
+
+
+        // Retrieves top priority issues based on a max-heap
+        // Priority is determined by custom logic in GetPriority method
+        public IEnumerable<Issue> GetPriorityIssues(int count)
+        {
+            // Retrieve all issues from the repository
+            var allIssues = _issueRepository.GetAllIssues();
+            var heap = new MaxHeapQueue();
+            // Insert all issues into the max-heap
+            foreach (var issue in allIssues)
+            {
+                heap.Insert(issue);
+            }
+            // Extract the top 'count' priority issues
+            var priorityIssues = new List<Issue>();
+            // Ensure we do not exceed the number of available issues
+            for (int i = 0; i < count && heap.Count > 0; i++)
+            {
+                priorityIssues.Add(heap.ExtractMax());
+            }
+            return priorityIssues;
         }
     }
 }

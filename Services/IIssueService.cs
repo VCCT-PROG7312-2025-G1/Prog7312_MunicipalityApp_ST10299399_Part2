@@ -14,6 +14,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
 
         // Updates the status of an existing issue
         void UpdateIssueStatus(int id, string newStatus);
+        IEnumerable<Issue> GetPriorityIssues(int count);
 
     }
 }
