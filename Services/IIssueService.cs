@@ -13,7 +13,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
         IEnumerable<Issue> GetAllIssues();
 
         // Updates the status of an existing issue
-        void UpdateIssueStatus(int id, string newStatus);
+        bool UpdateIssueStatus(int id, string newStatus);
         IEnumerable<Issue> GetPriorityIssues(int count);
 
     }

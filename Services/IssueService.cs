@@ -10,6 +10,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
     {
         // Dependency injection for repository
         private readonly IIssueRepository _issueRepository;
+        private static readonly StatusGraph _statusGraph = new StatusGraph();
         // Constructor to initialize repository
         public IssueService(IIssueRepository issueRepository)
         {
@@ -67,6 +68,26 @@ namespace Prog7312_MunicipalityApp_ST10299399.Services
                 priorityIssues.Add(heap.ExtractMax());
             }
             return priorityIssues;
+        }
+
+
+        public bool UpdateIssueStatus(int id, string newStatus)
+        {
+            var issueToUpdate = _issueRepository.GetIssueById(id);
+            if (issueToUpdate == null)
+            {
+                return false; 
+            }
+
+            string currentStatus = issueToUpdate.issueStatus;
+            if (!_statusGraph.IsValidTransition(currentStatus, newStatus))
+            {
+                return false;
+            }
+
+            issueToUpdate.issueStatus = newStatus;
+            _issueRepository.UpdateIssue(issueToUpdate);
+            return true;
         }
     }
 }
