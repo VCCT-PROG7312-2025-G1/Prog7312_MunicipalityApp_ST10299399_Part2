@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Prog7312_MunicipalityApp_ST10299399.Models.Issue>
+@using Prog7312_MunicipalityApp_ST10299399.Models
+@{
+    ViewData["Title"] = "Issue Dashboard";
+}
+
+<div class="container mt-4">
+    <h2>Issue Dashboard</h2>
+    <p>Issues are order by priority</p>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info" role="alert">
+            No issues reported yet.
+        </div>
+    }
+    else
+{
+    <table class="table table-striped mt-3">
+        <thead>
+            <tr>
+                <th>Issue ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Date Reported</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var issue in Model)
+            {
+                <tr>
+                    <td>@issue.Id</td>
+                    <td>@issue.issueLocation</td>
+                    <td>@issue.issueType</td>
+                    <td>@issue.issueDate.ToShortDateString()</td>
+                    <td>
+                        <span class="badge @(issue.issueStatus == IssueStatus.Reported.ToString() ? "bg-secondary" : 
+                                             issue.issueStatus == IssueStatus.InProgress.ToString() ? "bg-warning" :
+                                             issue.issueStatus == IssueStatus.Resolved.ToString() ? "bg-success" : "bg-dark")">
+                                @issue.issueStatus
+                        </span>
+                    </td>
+
+                    <td>
+                            <form asp-controller="AdminIssue" asp-action="UpdateStatus" method="post" class="d-flex">
+                                <input type="hidden" name="issueId" value="@issue.Id" />
+                                
+                                <select name="newStatus" class="form-control form-control-sm me-2" required>
+                                    <option value="" disabled selected>Change Status To</option>
+                                    
+                                    @* Loop through all possible status options defined in IssueStatus Enum *@
+                                    @foreach (var status in Enum.GetNames(typeof(IssueStatus)))
+                                    {
+                                        // Prevents selecting the current status as the 'new' status
+                                        if (status != issue.issueStatus)
+                                        {
+                                            <option value="@status">@status</option>
+                                        }
+                                    }
+                                </select>
+                                
+                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                            </form>
+                            <small class="text-muted mt-1 d-block">Invalid jumps are blocked by the Graph.</small>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+</div>

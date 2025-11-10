@@ -7,16 +7,22 @@ using System.Linq;
 namespace Prog7312_MunicipalityApp_ST10299399.Controllers
 {
     // Handles issue-related actions such as viewing and updating issue statuses
-    public class IssueController : Controller
+    public class AdminIssueController : Controller
     {
         private readonly IIssueService _issueService;
-        public IssueController(IIssueService issueService)
+        public AdminIssueController(IIssueService issueService)
         {
             _issueService = issueService;
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
         // Displays the admin dashboard with prioritized issues
-        public IActionResult Dashboard()
+        public IActionResult IssueDashboard()
         {
             if (HttpContext.Session.GetString("Role") != "Admin")
             {
@@ -49,7 +55,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             {
                 TempData["ErrorMessage"] = "Failed to update issue status.";
             }
-            return RedirectToAction("Dashboard");
+            return RedirectToAction("IssueDashboard");
         }
     }
 }
