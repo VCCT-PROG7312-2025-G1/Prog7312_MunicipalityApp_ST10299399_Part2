@@ -27,7 +27,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Controllers
             {
                 HttpContext.Session.SetString("Username", user.Username);
                 HttpContext.Session.SetString("Role", user.Role);
-                return RedirectToAction("Index", "Event");
+                return RedirectToAction("IssueDashboard", "AdminIssue");
             }
             ViewBag.Error = "Invalid username or password";
             return View();

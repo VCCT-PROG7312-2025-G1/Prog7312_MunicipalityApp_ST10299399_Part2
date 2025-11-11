@@ -4,6 +4,12 @@
     ViewData["Title"] = "Issue Dashboard";
 }
 
+<style>
+    body {
+        background-color: #D3D3D3;
+    }
+</style>
+
 <div class="container mt-4">
     <h2>Issue Dashboard</h2>
     <p>Issues are order by priority</p>
@@ -51,26 +57,23 @@
                     </td>
 
                     <td>
-                            <form asp-controller="AdminIssue" asp-action="UpdateStatus" method="post" class="d-flex">
-                                <input type="hidden" name="id" value="@issue.Id" />
+                          <form asp-controller="AdminIssue" asp-action="UpdateStatus" method="post" class="d-flex">
+                              <input type="hidden" name="id" value="@issue.Id" />
                                 
-                                <select name="newStatus" class="form-control form-control-sm me-2" required>
-                                    <option value="" disabled selected>Change Status To</option>
+                              <select name="newStatus" class="form-control form-control-sm me-2" required>
+                                  <option value="" disabled selected>Change Status To</option>
                                     
-                                    @* Loop through all possible status options defined in IssueStatus Enum *@
-                                    @foreach (var status in Enum.GetNames(typeof(IssueStatus)))
-                                    {
-                                        // Prevents selecting the current status as the 'new' status
-                                        if (status != issue.issueStatus)
-                                        {
-                                            <option value="@status">@status</option>
-                                        }
-                                    }
-                                </select>
+                                  @foreach (var status in Enum.GetNames(typeof(IssueStatus)))
+                                  {
+                                      if (status != issue.issueStatus)
+                                      {
+                                          <option value="@status">@status</option>
+                                      }
+                                  }
+                              </select>
                                 
-                                <button type="submit" class="btn btn-sm btn-primary">Update</button>
-                            </form>
-                            <small class="text-muted mt-1 d-block">Invalid jumps are blocked by the Graph.</small>
+                              <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                          </form>
                     </td>
                 </tr>
             }
