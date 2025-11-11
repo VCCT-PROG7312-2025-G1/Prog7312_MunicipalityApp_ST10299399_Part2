@@ -6,18 +6,22 @@ The repository is for a web application for a municipality. The application allo
 * **Upload Files:** Users can choose if they what to submit a file or image with their report.
 * **View Issues:** Users are able to see all the issues that have been submitted already
 * **Dynamic UI:** A modern home page that uses a carousel instead of just having 3 buttons
--- New Features
 * **View Events:** Users are able to view events
 * **Announcements:** Users are able to see announcements
 * **Admin Login:** Admin is able to login and add new events to the system
 * **Filter:** Users are able to filter events
+  
+-- New Features
+* **Status:** Admins are able to update the status of reported issues
 
 ## Advanced Data Stuctures used
-* **Linked List:** Part 1 used in IssueCollection, IssueNode, IssueRepository
+* **Binary Search Tree:** Part 3 this replaced the linked list from part one as the storage for issues, used in IssueCollection, IssueNode, IssueRepository
 * **Sorted Dictionary:** Part 2 used in EventService for to keep and display events in order
 * **Hash Set:** Part 2 used in Event Controller for filter feature
 * **Queue:** Part 2 used in Event Controller for displaying events with title announcements
 * **Hash Table:** Part 2 used in EventController for Recommendations Feature
+* **Max Heap:** Part 3 used in the admins dashboard to prioritize issues and display most important ones on top
+* **Graph:** Part 3 used in issue service to ensure the workflow of issues are correct
 
 ## Technology Used
 - Language: C#
@@ -40,9 +44,6 @@ Password: Admin@123
 ## Database Content
 - Open SQLite and press open database
 - Select the municipality.db file from the project folder
-
-## Future Updates
-- Status page improvements to make the page more modern
 
 ## References
 - UI inspiration - https://swartland.org.za/
