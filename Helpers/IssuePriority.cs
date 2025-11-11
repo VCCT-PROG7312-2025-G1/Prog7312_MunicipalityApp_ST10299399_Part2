@@ -1,4 +1,6 @@
-﻿namespace Prog7312_MunicipalityApp_ST10299399.Helpers
+﻿using Prog7312_MunicipalityApp_ST10299399.Models;
+
+namespace Prog7312_MunicipalityApp_ST10299399.Helpers
 {
     public static class IssuePriority
     {
@@ -10,11 +12,13 @@
         {
             return issueType.ToLower() switch
             {
-                "Load shedding" => High_Priority,
-                "water outage" => High_Priority,
-                "pothole" => High_Priority,
-                "streetlight outage" => Medium_Priority,
-                "graffiti" => Low_Priority,
+                "Loadshedding" => High_Priority,
+                "Water Leak" => High_Priority,
+                "Pothole" => High_Priority,
+                "Streetlight" => Medium_Priority,
+                "Garbage" => Low_Priority,
+                "Feature Request" => Low_Priority,
+                "Other" => Low_Priority,
                 _ => Low_Priority,
             };
         }

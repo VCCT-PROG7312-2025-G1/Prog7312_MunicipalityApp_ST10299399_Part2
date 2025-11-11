@@ -69,10 +69,26 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
                 new Issue
                 {
                     Id = 3,
-                    issueType = "Graffiti",
-                    issueDescription = "Graffiti on wall near park.",
+                    issueType = "Garbage",
+                    issueDescription = "Overflowing garbage bin in park.",
                     issueDate = DateTime.Now.AddDays(-1),
                     issueStatus = IssueStatus.Resolved.ToString(),
+                },
+                new Issue
+                {
+                    Id = 4,
+                    issueType = "Water Leak",
+                    issueDescription = "Water leak on Elm St.",
+                    issueDate = DateTime.Now.AddDays(-2),
+                    issueStatus = IssueStatus.Reported.ToString(),
+                },
+                new Issue
+                {
+                    Id = 5,
+                    issueType = "Loadshedding",
+                    issueDescription = "Frequent loadshedding in area.",
+                    issueDate = DateTime.Now.AddDays(-4),
+                    issueStatus = IssueStatus.InProgress.ToString(),
                 }
             };
             foreach (var issue in initialIssues)
