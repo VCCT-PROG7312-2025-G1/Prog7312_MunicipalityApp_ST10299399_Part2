@@ -6,13 +6,13 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
     public class IssueRepository : IIssueRepository
     {
         private static readonly ServiceRequestTree _issueTree = new ServiceRequestTree();
-        private static int _nextId = 0;
+        private static int _nextId = 6;
         private static bool _isSeeded = false; // Flag to ensure seeding happens only once
 
         // Add a new issue to the collection
         public void AddIssue(Issue issue)
         {
-            issue.Id = System.Threading.Interlocked.Increment(ref _nextId);
+            issue.Id = _nextId++;
             _issueTree.Insert(issue);
         }
 
@@ -45,6 +45,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
         }
 
         // Seed the repository with initial data
+        // These seeded issues was done with the use of github copilot just to make easy
         private void SeededIssues()
         {
             var initialIssues = new List<Issue>
@@ -53,6 +54,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
                 {
                     Id = 1,
                     issueType = "Pothole",
+                    issueLocation = "Main St.",
                     issueDescription = "Large pothole on Main St.",
                     issueDate = DateTime.Now.AddDays(-5),
                     issueStatus = IssueStatus.Reported.ToString(),
@@ -62,6 +64,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
                 {
                     Id = 2,
                     issueType = "Streetlight",
+                    issueLocation = "5th Ave.",
                     issueDescription = "Streetlight not working on 5th Ave.",
                     issueDate = DateTime.Now.AddDays(-3),
                     issueStatus = IssueStatus.InProgress.ToString(),
@@ -70,6 +73,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
                 {
                     Id = 3,
                     issueType = "Garbage",
+                    issueLocation = "Central Park",
                     issueDescription = "Overflowing garbage bin in park.",
                     issueDate = DateTime.Now.AddDays(-1),
                     issueStatus = IssueStatus.Resolved.ToString(),
@@ -78,6 +82,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
                 {
                     Id = 4,
                     issueType = "Water Leak",
+                    issueLocation = "Elm St.",
                     issueDescription = "Water leak on Elm St.",
                     issueDate = DateTime.Now.AddDays(-2),
                     issueStatus = IssueStatus.Reported.ToString(),
@@ -86,6 +91,7 @@ namespace Prog7312_MunicipalityApp_ST10299399.Repositories
                 {
                     Id = 5,
                     issueType = "Loadshedding",
+                    issueLocation = "Downtown",
                     issueDescription = "Frequent loadshedding in area.",
                     issueDate = DateTime.Now.AddDays(-4),
                     issueStatus = IssueStatus.InProgress.ToString(),
